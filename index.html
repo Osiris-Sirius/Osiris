@@ -6,7 +6,7 @@
     
     <title>OSIRIS SIRIUS | Aberdeen Social Media Advertising & Video Production</title>
     <meta name="description" content="Osiris Sirius is Aberdeen's premier agency for Social Media Advertising, Video Production, and AI VFX. We elevate brands with high-end aesthetics and strategic growth management.">
-    <meta name="keywords" content="Aberdeen Social Media Advertising, Video Production Aberdeen, VFX Scotland, Content Creation, OF Management, Digital Marketing Aberdeen, DV SEO">
+    <meta name="keywords" content="Aberdeen Social Media Advertising, Video Production Aberdeen, VFX Scotland, Content Creation, OF Management, Digital Marketing Aberdeen, Social SEO">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Osiris Sirius">
     <meta name="geo.region" content="GB-SCT">
@@ -65,43 +65,26 @@
         
         #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.8; }
 
-        /* ---- NEW NEON HEART CURSOR CSS ---- */
+        /* NEON HEART CURSOR */
         #reticle {
-            position: fixed;
-            width: 14px; height: 14px;
-            background: var(--neon-pink);
+            position: fixed; width: 14px; height: 14px; background: var(--neon-pink);
             pointer-events: none; z-index: 1000;
-            /* Rotate 45 degrees to make the bottom point of the heart */
             transform: translate(-50%, -50%) rotate(45deg);
             transition: transform 0.15s ease-out, box-shadow 0.3s;
-            box-shadow: 0 0 20px var(--neon-pink); /* Intense base glow */
+            box-shadow: 0 0 20px var(--neon-pink);
         }
-
-        /* The two round lobes of the heart using pseudo-elements */
         #reticle::before, #reticle::after {
-            content: '';
-            position: absolute;
-            width: 14px; height: 14px;
-            background: var(--neon-pink);
-            border-radius: 50%;
-            box-shadow: 0 0 20px var(--neon-pink); /* Ensure lobes glow too */
+            content: ''; position: absolute; width: 14px; height: 14px;
+            background: var(--neon-pink); border-radius: 50%; box-shadow: 0 0 20px var(--neon-pink);
         }
-
         #reticle::before { top: -50%; left: 0; }
         #reticle::after { top: 0; left: -50%; }
 
-        /* Hover state - Scale up the heart and intensify glow */
         .reticle-hover {
-            /* Must keep the rotation when scaling */
             transform: translate(-50%, -50%) rotate(45deg) scale(2.5) !important;
             box-shadow: 0 0 40px var(--neon-pink), 0 0 60px var(--neon-pink) !important;
         }
-        /* Ensure the pseudo-elements glow intensely on hover too */
-        .reticle-hover::before, .reticle-hover::after {
-             box-shadow: 0 0 40px var(--neon-pink) !important;
-        }
-        /* ---- END NEW CURSOR CSS ---- */
-
+        .reticle-hover::before, .reticle-hover::after { box-shadow: 0 0 40px var(--neon-pink) !important; }
 
         .content { position: relative; z-index: 10; min-height: 100vh; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 120px 20px 100px 20px; box-sizing: border-box; }
 
@@ -122,8 +105,7 @@
             grid-template-columns: repeat(3, 1fr); gap: 15px;
         }
         .service-item { 
-            background: transparent; 
-            padding: 22px; 
+            background: transparent; padding: 22px; 
             border-radius: 12px; border: 1px solid rgba(255, 0, 127, 0.15);
             backdrop-filter: blur(10px); transition: 0.4s; text-align: left;
             display: flex; flex-direction: column; align-items: flex-start;
@@ -202,8 +184,8 @@
         <div class="services-container">
             <div class="service-item">
                 <span class="material-symbols-outlined">auto_awesome</span>
-                <h3>VFX & AI</h3>
-                <p>Ethereal digital enhancements and AI workflows for high-end visual storytelling.</p>
+                <h3>VFX & AI Makeovers</h3>
+                <p>Ethereal digital enhancements, Photoshop AI transformations, and workflows for high-end visual storytelling.</p>
             </div>
             <div class="service-item">
                 <span class="material-symbols-outlined">videocam</span>
@@ -213,7 +195,7 @@
             <div class="service-item">
                 <span class="material-symbols-outlined">photo_camera</span>
                 <h3>Photography</h3>
-                <p>Editorial-grade imagery designed to elevate your professional presence.</p>
+                <p>Editorial-grade imagery designed to elevate your professional presence. Available for semi-pro, amateur, or cover shots.</p>
             </div>
             <div class="service-item">
                 <span class="material-symbols-outlined">hub</span>
@@ -222,13 +204,13 @@
             </div>
             <div class="service-item">
                 <span class="material-symbols-outlined">monitoring</span>
-                <h3>DV SEO</h3>
-                <p>Expert search optimization to ensure your video content ranks locally and globally.</p>
+                <h3>Social SEO</h3>
+                <p>Expert search optimization for TikTok, Instagram, and YouTube to ensure your content dominates the algorithm.</p>
             </div>
             <div class="service-item">
                 <span class="material-symbols-outlined">diamond</span>
                 <h3>OF Management</h3>
-                <p>Premium, discreet management for elite digital creators.</p>
+                <p>Full-service strategy, content planning, and daily management to scale revenue for elite creators.</p>
             </div>
         </div>
 
@@ -267,7 +249,13 @@
             star.width = window.innerWidth; star.height = window.innerHeight;
             stars = [];
             for (let i = 0; i < 250; i++) {
-                stars.push({ x: Math.random() * star.width, y: Math.random() * star.height, speed: 0.15 + Math.random() * 0.4, size: Math.random() * 2 });
+                // INCREASED SIZE VARIANCE HERE
+                stars.push({ 
+                    x: Math.random() * star.width, 
+                    y: Math.random() * star.height, 
+                    speed: 0.15 + Math.random() * 0.4, 
+                    size: 0.5 + Math.random() * 3 
+                });
             }
         }
 
