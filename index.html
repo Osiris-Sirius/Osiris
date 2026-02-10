@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OSIRIS | AI-Powered Multimedia</title>
+    <title>OSIRIS SIRIUS | AI Video Production</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
 
@@ -11,41 +11,57 @@
         
         #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
 
-        /* Scanline Texture */
+        /* CRT/Scanline Overlay */
         body::after {
             content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
             z-index: 20; background-size: 100% 3px, 3px 100%; pointer-events: none;
         }
 
-        .content { position: relative; z-index: 10; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .content { position: relative; z-index: 10; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
 
-        /* Glitch Title */
+        /* Glitch Title for Osiris Sirius */
         h1 { 
-            font-family: 'Orbitron', sans-serif; font-size: clamp(2.5rem, 10vw, 5rem); 
-            letter-spacing: 15px; margin: 0; color: #fff;
+            font-family: 'Orbitron', sans-serif; 
+            font-size: clamp(2rem, 8vw, 4.5rem); 
+            letter-spacing: clamp(10px, 2vw, 20px); 
+            margin: 0; 
+            color: #fff;
+            text-transform: uppercase;
             text-shadow: 2px 0 #0fa, -2px 0 #f0f;
             animation: glitch 3s infinite;
         }
 
         h2 {
-            font-size: clamp(0.7rem, 2vw, 0.9rem); letter-spacing: 5px; text-transform: uppercase;
-            color: #0fa; margin-top: 10px; opacity: 0.8;
+            font-size: clamp(0.6rem, 1.5vw, 0.8rem); 
+            letter-spacing: 5px; 
+            text-transform: uppercase;
+            color: #0fa; 
+            margin-top: 15px; 
+            opacity: 0.8;
+            font-weight: 400;
         }
 
-        .ai-tag {
-            background: rgba(0, 255, 170, 0.1); border: 1px solid #0fa;
-            padding: 5px 15px; border-radius: 20px; font-size: 0.6rem;
-            color: #0fa; margin-top: 20px; letter-spacing: 2px;
+        .ai-status {
+            margin-top: 30px;
+            padding: 8px 20px;
+            border: 1px solid rgba(0, 255, 170, 0.3);
+            background: rgba(0, 255, 170, 0.05);
+            font-size: 0.65rem;
+            color: #0fa;
+            letter-spacing: 2px;
+            display: inline-block;
         }
 
-        #countdown { display: flex; gap: 20px; justify-content: center; margin-top: 50px; font-size: clamp(1.2rem, 5vw, 2.2rem); color: #fff; }
-        .label { font-size: 0.5rem; color: #0fa; text-transform: uppercase; display: block; margin-top: 8px; opacity: 0.5; }
+        /* Countdown Style */
+        #countdown { display: flex; gap: 15px; justify-content: center; margin-top: 50px; font-size: clamp(1.2rem, 4vw, 2rem); color: #fff; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .time-box { display: flex; flex-direction: column; min-width: 60px; }
+        .label { font-size: 0.5rem; color: #0fa; text-transform: uppercase; display: block; margin-top: 8px; opacity: 0.6; }
 
         @keyframes glitch {
-            0% { text-shadow: 2px 0 #0fa, -2px 0 #f0f; }
-            1% { text-shadow: -2px 0 #0fa, 2px 0 #f0f; }
-            2% { text-shadow: 2px 0 #0fa, -2px 0 #f0f; }
+            0% { text-shadow: 2px 0 #0fa, -2px 0 #f0f; transform: translate(0); }
+            1% { text-shadow: -2px 0 #0fa, 2px 0 #f0f; transform: translate(-1px, 1px); }
+            2% { text-shadow: 2px 0 #0fa, -2px 0 #f0f; transform: translate(0); }
             100% { text-shadow: 2px 0 #0fa, -2px 0 #f0f; }
         }
     </style>
@@ -54,15 +70,16 @@
     <canvas id="starCanvas"></canvas>
 
     <div class="content">
-        <h1>OSIRIS</h1>
-        <h2>NEXT-GEN VIDEO PRODUCTION</h2>
-        <div class="ai-tag">AI-ENHANCED & VFX FOR LOCAL BUSINESS</div>
+        <h1>Osiris Sirius</h1>
+        <h2>Self-Shooting Production • AI VFX</h2>
+        
+        <div class="ai-status">SYSTEM STATUS: OPTIMIZING LOCAL BUSINESS CONTENT...</div>
 
         <div id="countdown">
-            <div><span id="days">00</span><span class="label">Days</span></div>
-            <div><span id="hours">00</span><span class="label">Hrs</span></div>
-            <div><span id="minutes">00</span><span class="label">Min</span></div>
-            <div><span id="seconds">00</span><span class="label">Sec</span></div>
+            <div class="time-box"><span id="days">00</span><span class="label">Days</span></div>
+            <div class="time-box"><span id="hours">00</span><span class="label">Hrs</span></div>
+            <div class="time-box"><span id="minutes">00</span><span class="label">Min</span></div>
+            <div class="time-box"><span id="seconds">00</span><span class="label">Sec</span></div>
         </div>
     </div>
 
@@ -75,12 +92,12 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             points = [];
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 120; i++) {
                 points.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4
                 });
             }
         }
@@ -89,8 +106,8 @@
             ctx.fillStyle = "#010103";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            ctx.strokeStyle = "rgba(0, 255, 170, 0.15)";
-            ctx.fillStyle = "rgba(0, 255, 170, 0.5)";
+            ctx.strokeStyle = "rgba(0, 255, 170, 0.12)";
+            ctx.fillStyle = "rgba(0, 255, 170, 0.4)";
 
             points.forEach((p, i) => {
                 p.x += p.vx; p.y += p.vy;
@@ -98,14 +115,14 @@
                 if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+                ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
                 ctx.fill();
 
                 for (let j = i + 1; j < points.length; j++) {
                     let p2 = points[j];
                     let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-                    if (dist < 150) {
-                        ctx.lineWidth = 1 - dist / 150;
+                    if (dist < 130) {
+                        ctx.lineWidth = 1 - dist / 130;
                         ctx.beginPath();
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(p2.x, p2.y);
@@ -116,18 +133,4 @@
             requestAnimationFrame(animate);
         }
 
-        window.addEventListener('resize', init);
-        init(); animate();
-
-        const target = new Date("April 1, 2026 00:00:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const diff = target - now;
-            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
-        }, 1000);
-    </script>
-</body>
-</html>
+        window.
