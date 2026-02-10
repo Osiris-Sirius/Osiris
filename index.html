@@ -32,10 +32,10 @@
             margin-bottom: 20px;
         }
 
-        /* The Video Window with Neon Glow */
+        /* Responsive Video Container - Optimized for 16:9 */
         .video-container {
             width: 100%;
-            max-width: 640px;
+            max-width: 700px;
             aspect-ratio: 16 / 9;
             border: 2px solid #0fa;
             box-shadow: 0 0 25px rgba(0, 255, 170, 0.6);
@@ -72,7 +72,7 @@
         
         <div class="video-container">
             <iframe 
-                src="https://www.youtube.com/embed/T3pTlVUklSE?autoplay=1&mute=1&loop=1&playlist=T3pTlVUklSE&controls=1&rel=0" 
+                src="https://www.youtube.com/embed/PASTE_NEW_ID_HERE?autoplay=1&mute=1&loop=1&playlist=PASTE_NEW_ID_HERE&controls=1&rel=0" 
                 title="Osiris Showcase" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -89,10 +89,10 @@
     </div>
 
     <script>
+        // Starfield logic stays the same
         const canvas = document.getElementById('starCanvas');
         const ctx = canvas.getContext('2d');
         let stars = [];
-
         function init() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -101,7 +101,6 @@
                 stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 1.8, speed: 0.1 + Math.random() * 0.4 });
             }
         }
-
         function animate() {
             ctx.fillStyle = "#020205";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -112,12 +111,11 @@
             });
             requestAnimationFrame(animate);
         }
-
         window.addEventListener('resize', init);
         init();
         animate();
 
-        // Countdown to April 1, 2026
+        // Countdown logic
         const target = new Date("April 1, 2026 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
