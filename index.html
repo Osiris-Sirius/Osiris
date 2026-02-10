@@ -34,15 +34,8 @@
       "priceRange": "$$$",
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
-        "opens": "09:00",
-        "closes": "18:00"
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00", "closes": "18:00"
       },
       "sameAs": [
         "https://www.instagram.com/yourprofile",
@@ -58,33 +51,45 @@
         :root {
             --neon-pink: #ff007f;
             --soft-violet: #bc13fe;
-            --bg: #000000; /* PURE BLACK */
+            --bg: #000000;
         }
 
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto; background-color: var(--bg); font-family: 'Montserrat', sans-serif; color: white; cursor: none; scroll-behavior: smooth; }
         
         #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.8; }
 
-        /* NEON HEART CURSOR */
+        /* ---- NEW CAMERA LENS CURSOR ---- */
         #reticle {
-            position: fixed; width: 14px; height: 14px; background: var(--neon-pink);
+            position: fixed; width: 40px; height: 40px;
+            border: 1px solid var(--neon-pink); border-radius: 50%;
             pointer-events: none; z-index: 1000;
-            transform: translate(-50%, -50%) rotate(45deg);
-            transition: transform 0.15s ease-out, box-shadow 0.3s;
-            box-shadow: 0 0 20px var(--neon-pink);
+            transform: translate(-50%, -50%);
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.2s, height 0.2s;
+            box-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
+            mix-blend-mode: exclusion;
         }
-        #reticle::before, #reticle::after {
-            content: ''; position: absolute; width: 14px; height: 14px;
-            background: var(--neon-pink); border-radius: 50%; box-shadow: 0 0 20px var(--neon-pink);
+        /* Horizontal Crosshair */
+        #reticle::before {
+            content: ''; position: absolute; top: 50%; left: 20%; width: 60%; height: 1px;
+            background: var(--neon-pink); opacity: 0.7; transition: 0.2s;
         }
-        #reticle::before { top: -50%; left: 0; }
-        #reticle::after { top: 0; left: -50%; }
+        /* Vertical Crosshair */
+        #reticle::after {
+            content: ''; position: absolute; left: 50%; top: 20%; height: 60%; width: 1px;
+            background: var(--neon-pink); opacity: 0.7; transition: 0.2s;
+        }
 
+        /* "FOCUS LOCK" Hover State */
         .reticle-hover {
-            transform: translate(-50%, -50%) rotate(45deg) scale(2.5) !important;
-            box-shadow: 0 0 40px var(--neon-pink), 0 0 60px var(--neon-pink) !important;
+            transform: translate(-50%, -50%) rotate(90deg) scale(1.2) !important;
+            border-color: #fff; /* Turns white like a camera focus confirmation */
+            border-width: 2px;
+            box-shadow: 0 0 30px var(--neon-pink);
         }
-        .reticle-hover::before, .reticle-hover::after { box-shadow: 0 0 40px var(--neon-pink) !important; }
+        .reticle-hover::before, .reticle-hover::after {
+            background: #fff; width: 40%; height: 40%; top: 30%; left: 30%; /* Crosshairs tighten */
+        }
+        /* ---- END CURSOR ---- */
 
         .content { position: relative; z-index: 10; min-height: 100vh; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 120px 20px 100px 20px; box-sizing: border-box; }
 
@@ -99,7 +104,6 @@
         }
         h2 { font-size: 0.7rem; letter-spacing: 8px; text-transform: uppercase; color: var(--soft-violet); margin-top: 10px; opacity: 0.9; }
 
-        /* Service Grid */
         .services-container {
             max-width: 900px; margin-top: 60px; display: grid; 
             grid-template-columns: repeat(3, 1fr); gap: 15px;
@@ -249,18 +253,11 @@
             star.width = window.innerWidth; star.height = window.innerHeight;
             stars = [];
             for (let i = 0; i < 250; i++) {
-                // INCREASED SIZE VARIANCE HERE
-                stars.push({ 
-                    x: Math.random() * star.width, 
-                    y: Math.random() * star.height, 
-                    speed: 0.15 + Math.random() * 0.4, 
-                    size: 0.5 + Math.random() * 3 
-                });
+                stars.push({ x: Math.random() * star.width, y: Math.random() * star.height, speed: 0.15 + Math.random() * 0.4, size: 0.5 + Math.random() * 3 });
             }
         }
 
         function drawStars() {
-            // PURE BLACK BG
             sctx.fillStyle = "#000000"; 
             sctx.fillRect(0, 0, star.width, star.height);
             stars.forEach(s => {
