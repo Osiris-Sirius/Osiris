@@ -20,7 +20,6 @@
 
         .content { position: relative; z-index: 10; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
 
-        /* Glitch Title for Osiris Sirius */
         h1 { 
             font-family: 'Orbitron', sans-serif; 
             font-size: clamp(2rem, 8vw, 4.5rem); 
@@ -39,23 +38,37 @@
             color: #0fa; 
             margin-top: 15px; 
             opacity: 0.8;
-            font-weight: 400;
         }
 
-        .ai-status {
+        /* Socials Container */
+        .socials {
+            display: flex;
+            gap: 25px;
             margin-top: 30px;
-            padding: 8px 20px;
-            border: 1px solid rgba(0, 255, 170, 0.3);
-            background: rgba(0, 255, 170, 0.05);
-            font-size: 0.65rem;
-            color: #0fa;
+        }
+
+        .social-link {
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.7rem;
             letter-spacing: 2px;
-            display: inline-block;
+            text-transform: uppercase;
+            border: 1px solid rgba(0, 255, 170, 0.3);
+            padding: 8px 15px;
+            transition: 0.4s ease;
+            background: rgba(0, 255, 170, 0.05);
+        }
+
+        .social-link:hover {
+            background: #0fa;
+            color: #000;
+            box-shadow: 0 0 20px #0fa;
+            border-color: #fff;
         }
 
         /* Countdown Style */
-        #countdown { display: flex; gap: 15px; justify-content: center; margin-top: 50px; font-size: clamp(1.2rem, 4vw, 2rem); color: #fff; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
-        .time-box { display: flex; flex-direction: column; min-width: 60px; }
+        #countdown { display: flex; gap: 15px; justify-content: center; margin-top: 50px; font-size: clamp(1.2rem, 4vw, 2rem); color: #fff; padding-top: 20px; }
+        .time-box { display: flex; flex-direction: column; min-width: 65px; }
         .label { font-size: 0.5rem; color: #0fa; text-transform: uppercase; display: block; margin-top: 8px; opacity: 0.6; }
 
         @keyframes glitch {
@@ -73,7 +86,11 @@
         <h1>Osiris Sirius</h1>
         <h2>Self-Shooting Production • AI VFX</h2>
         
-        <div class="ai-status">SYSTEM STATUS: OPTIMIZING LOCAL BUSINESS CONTENT...</div>
+        <div class="socials">
+            <a href="#" target="_blank" class="social-link">Instagram</a>
+            <a href="#" target="_blank" class="social-link">YouTube</a>
+            <a href="#" target="_blank" class="social-link">TikTok</a>
+        </div>
 
         <div id="countdown">
             <div class="time-box"><span id="days">00</span><span class="label">Days</span></div>
@@ -105,32 +122,57 @@
         function animate() {
             ctx.fillStyle = "#010103";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
             ctx.strokeStyle = "rgba(0, 255, 170, 0.12)";
             ctx.fillStyle = "rgba(0, 255, 170, 0.4)";
-
             points.forEach((p, i) => {
                 p.x += p.vx; p.y += p.vy;
                 if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
                 if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
-                ctx.fill();
-
+                ctx.beginPath(); ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2); ctx.fill();
                 for (let j = i + 1; j < points.length; j++) {
                     let p2 = points[j];
                     let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
                     if (dist < 130) {
                         ctx.lineWidth = 1 - dist / 130;
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
+                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
                     }
                 }
             });
             requestAnimationFrame(animate);
         }
 
-        window.
+        window.addEventListener('resize', init);
+        init(); animate();
+
+        // REBUILT ROBUST COUNTDOWN
+        function updateCountdown() {
+            const targetDate = new Date("April 1, 2026 00:00:00").getTime();
+            const now = new Date().getTime();
+            const gap = targetDate - now;
+
+            if (gap <= 0) {
+                document.getElementById("countdown").innerHTML = "STUDIO LIVE";
+                return;
+            }
+
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            const d = Math.floor(gap / day);
+            const h = Math.floor((gap % day) / hour);
+            const m = Math.floor((gap % hour) / minute);
+            const s = Math.floor((gap % minute) / second);
+
+            document.getElementById("days").innerText = d.toString().padStart(2, '0');
+            document.getElementById("hours").innerText = h.toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Run immediately
+    </script>
+</body>
+</html>
