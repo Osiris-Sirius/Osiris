@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OSIRIS SIRIUS | NEON LUXURY HUB</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Orbitron:wght@400;700&display=swap');
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Orbitron:wght@400;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0" />
 
+    <style>
         :root {
             --neon-pink: #ff007f;
             --soft-violet: #bc13fe;
             --bg: #050206;
         }
 
-        /* Scrolling Enabled */
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto; background-color: var(--bg); font-family: 'Montserrat', sans-serif; color: white; cursor: none; scroll-behavior: smooth; }
         
         #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.8; }
@@ -29,7 +28,6 @@
 
         .content { position: relative; z-index: 10; min-height: 100vh; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 120px 20px 100px 20px; box-sizing: border-box; }
 
-        /* Header Wrapper with Wings */
         .header-wrapper, .countdown-wrapper { display: flex; align-items: center; gap: clamp(20px, 5vw, 40px); margin-bottom: 10px; }
         .wing { width: clamp(30px, 8vw, 80px); height: 2px; background: linear-gradient(to right, transparent, var(--neon-pink)); position: relative; box-shadow: 0 0 15px var(--neon-pink); }
         .wing::before { content: ''; position: absolute; top: -10px; right: 0; width: 2px; height: 20px; background: var(--neon-pink); box-shadow: 0 0 10px var(--neon-pink); }
@@ -50,8 +48,17 @@
             background: rgba(255, 255, 255, 0.02); padding: 22px; 
             border-radius: 12px; border: 1px solid rgba(255, 0, 127, 0.15);
             backdrop-filter: blur(10px); transition: 0.4s; text-align: left;
+            display: flex; flex-direction: column; align-items: flex-start;
         }
         .service-item:hover { border-color: var(--neon-pink); box-shadow: 0 0 25px rgba(255, 0, 127, 0.3); transform: translateY(-5px); }
+        
+        /* Icon Styling */
+        .material-symbols-outlined {
+            font-size: 32px; color: var(--neon-pink); margin-bottom: 15px;
+            text-shadow: 0 0 10px var(--neon-pink); transition: 0.3s;
+        }
+        .service-item:hover .material-symbols-outlined { transform: scale(1.1); text-shadow: 0 0 20px var(--neon-pink); }
+
         .service-item h3 { font-size: 0.75rem; color: var(--neon-pink); margin: 0 0 8px 0; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 0 5px var(--neon-pink); }
         .service-item p { font-size: 0.65rem; line-height: 1.6; color: rgba(255, 255, 255, 0.8); margin: 0; }
 
@@ -62,7 +69,6 @@
         }
         .social-link:hover { background: var(--neon-pink); color: #fff; box-shadow: 0 0 25px var(--neon-pink); border-color: #fff; }
 
-        /* Countdown with Wings */
         #countdown { display: flex; gap: 15px; justify-content: center; }
         .countdown-wrapper { margin-top: 60px; }
         
@@ -92,7 +98,6 @@
         }
         .enquiry-btn:hover { background: var(--neon-pink); box-shadow: 0 0 50px var(--neon-pink); color: #fff; }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 10px; }
@@ -118,12 +123,36 @@
         </div>
 
         <div class="services-container">
-            <div class="service-item"><h3>VFX & AI</h3><p>Ethereal digital enhancements and AI workflows for high-end visual storytelling.</p></div>
-            <div class="service-item"><h3>Production</h3><p>Cinematic content captured via Adobe Premiere & After Effects with an eye for elegance and identity.</p></div>
-            <div class="service-item"><h3>Photography</h3><p>Editorial-grade imagery designed to elevate your professional presence.</p></div>
-            <div class="service-item"><h3>Social Media</h3><p>Curated content strategies to build high-value communities.</p></div>
-            <div class="service-item"><h3>DV SEO</h3><p>Expert search optimization for high-impact visual content.</p></div>
-            <div class="service-item"><h3>OF Management</h3><p>Premium, discreet management for elite digital creators.</p></div>
+            <div class="service-item">
+                <span class="material-symbols-outlined">auto_awesome</span>
+                <h3>VFX & AI</h3>
+                <p>Ethereal digital enhancements and AI workflows for high-end visual storytelling.</p>
+            </div>
+            <div class="service-item">
+                <span class="material-symbols-outlined">videocam</span>
+                <h3>Video Production</h3>
+                <p>Cinematic content captured via Adobe Premiere & After Effects with an eye for elegance and identity.</p>
+            </div>
+            <div class="service-item">
+                <span class="material-symbols-outlined">photo_camera</span>
+                <h3>Photography</h3>
+                <p>Editorial-grade imagery designed to elevate your professional presence.</p>
+            </div>
+            <div class="service-item">
+                <span class="material-symbols-outlined">hub</span>
+                <h3>Social Media</h3>
+                <p>Curated content strategies to build high-value communities.</p>
+            </div>
+            <div class="service-item">
+                <span class="material-symbols-outlined">monitoring</span>
+                <h3>DV SEO</h3>
+                <p>Expert search optimization for high-impact visual content.</p>
+            </div>
+            <div class="service-item">
+                <span class="material-symbols-outlined">diamond</span>
+                <h3>OF Management</h3>
+                <p>Premium, discreet management for elite digital creators.</p>
+            </div>
         </div>
 
         <div class="socials">
@@ -161,12 +190,7 @@
             star.width = window.innerWidth; star.height = window.innerHeight;
             stars = [];
             for (let i = 0; i < 250; i++) {
-                stars.push({ 
-                    x: Math.random() * star.width, 
-                    y: Math.random() * star.height, 
-                    speed: 0.15 + Math.random() * 0.4,
-                    size: Math.random() * 2
-                });
+                stars.push({ x: Math.random() * star.width, y: Math.random() * star.height, speed: 0.15 + Math.random() * 0.4, size: Math.random() * 2 });
             }
         }
 
@@ -174,9 +198,7 @@
             sctx.fillStyle = "#050206"; sctx.fillRect(0, 0, star.width, star.height);
             stars.forEach(s => {
                 sctx.fillStyle = `rgba(255, 0, 127, ${0.5 + Math.random() * 0.5})`; 
-                sctx.beginPath(); 
-                sctx.arc(s.x, s.y, s.size, 0, Math.PI * 2); 
-                sctx.fill();
+                sctx.beginPath(); sctx.arc(s.x, s.y, s.size, 0, Math.PI * 2); sctx.fill();
                 s.y -= s.speed; if (s.y < 0) s.y = star.height;
             });
             requestAnimationFrame(drawStars);
