@@ -58,36 +58,34 @@
         
         #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.8; }
 
-        /* ---- NEW CAMERA LENS CURSOR ---- */
+        /* ---- CAMERA FLASH CURSOR ---- */
         #reticle {
-            position: fixed; width: 40px; height: 40px;
-            border: 1px solid var(--neon-pink); border-radius: 50%;
-            pointer-events: none; z-index: 1000;
+            position: fixed; width: 15px; height: 15px;
+            background: #fff; /* White core */
+            border-radius: 50%; pointer-events: none; z-index: 1000;
             transform: translate(-50%, -50%);
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.2s, height 0.2s;
-            box-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
-            mix-blend-mode: exclusion;
-        }
-        /* Horizontal Crosshair */
-        #reticle::before {
-            content: ''; position: absolute; top: 50%; left: 20%; width: 60%; height: 1px;
-            background: var(--neon-pink); opacity: 0.7; transition: 0.2s;
-        }
-        /* Vertical Crosshair */
-        #reticle::after {
-            content: ''; position: absolute; left: 50%; top: 20%; height: 60%; width: 1px;
-            background: var(--neon-pink); opacity: 0.7; transition: 0.2s;
+            box-shadow: 0 0 15px var(--neon-pink), 0 0 30px #fff; /* Pink glow, white halo */
+            animation: pulseSlow 2s infinite ease-in-out;
+            mix-blend-mode: screen;
         }
 
-        /* "FOCUS LOCK" Hover State */
-        .reticle-hover {
-            transform: translate(-50%, -50%) rotate(90deg) scale(1.2) !important;
-            border-color: #fff; /* Turns white like a camera focus confirmation */
-            border-width: 2px;
-            box-shadow: 0 0 30px var(--neon-pink);
+        /* Slow breathing pulse when idle */
+        @keyframes pulseSlow {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.6; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; box-shadow: 0 0 40px var(--neon-pink); }
+            100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.6; }
         }
-        .reticle-hover::before, .reticle-hover::after {
-            background: #fff; width: 40%; height: 40%; top: 30%; left: 30%; /* Crosshairs tighten */
+
+        /* Rapid Strobe Flash on Hover */
+        .reticle-hover {
+            animation: strobeFlash 0.15s infinite !important;
+            background: #fff !important;
+        }
+
+        @keyframes strobeFlash {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
+            50% { transform: translate(-50%, -50%) scale(3.5); opacity: 1; box-shadow: 0 0 60px #fff; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
         }
         /* ---- END CURSOR ---- */
 
@@ -140,7 +138,9 @@
             border-radius: 10px; display: flex; flex-direction: column; justify-content: center; 
             align-items: center; background: rgba(0, 0, 0, 0.8); box-shadow: 0 0 10px rgba(255, 0, 127, 0.1);
         }
-        .time-box span { font-size: 1.3rem; color: #fff; text-shadow: 0 0 8px var(--neon-pink); }
+        /* WHITE TEXT FOR COUNTDOWN */
+        .time-box span { font-size: 1.3rem; color: #fff; text-shadow: 0 0 10px var(--neon-pink); }
+        .time-box div { font-size: 0.35rem; opacity: 0.9; color: #fff !important; text-shadow: 0 0 5px var(--neon-pink); }
 
         .footer-divider {
             width: 250px; height: 2px;
@@ -227,10 +227,10 @@
         <div class="countdown-wrapper">
             <div class="wing"></div>
             <div id="countdown">
-                <div class="time-box"><span id="days">00</span><div style="font-size:0.35rem; opacity:0.8; color: var(--neon-pink);">DAYS</div></div>
-                <div class="time-box"><span id="hours">00</span><div style="font-size:0.35rem; opacity:0.8; color: var(--neon-pink);">HRS</div></div>
-                <div class="time-box"><span id="minutes">00</span><div style="font-size:0.4rem; opacity:0.8; color: var(--neon-pink);">MIN</div></div>
-                <div class="time-box"><span id="seconds">00</span><div style="font-size:0.4rem; opacity:0.8; color: var(--neon-pink);">SEC</div></div>
+                <div class="time-box"><span id="days">00</span><div>DAYS</div></div>
+                <div class="time-box"><span id="hours">00</span><div>HRS</div></div>
+                <div class="time-box"><span id="minutes">00</span><div>MIN</div></div>
+                <div class="time-box"><span id="seconds">00</span><div>SEC</div></div>
             </div>
             <div class="wing" style="transform: rotate(180deg);"></div>
         </div>
@@ -260,10 +260,18 @@
         function drawStars() {
             sctx.fillStyle = "#000000"; 
             sctx.fillRect(0, 0, star.width, star.height);
+            
+            // SCROLL EFFECT: Stars accelerate based on scroll position
+            const scrollFactor = window.scrollY * 0.005; 
+
             stars.forEach(s => {
                 sctx.fillStyle = `rgba(255, 0, 127, ${0.5 + Math.random() * 0.5})`; 
                 sctx.beginPath(); sctx.arc(s.x, s.y, s.size, 0, Math.PI * 2); sctx.fill();
-                s.y -= s.speed; if (s.y < 0) s.y = star.height;
+                
+                // Acceleration Logic
+                s.y -= (s.speed + scrollFactor); 
+                
+                if (s.y < 0) s.y = star.height;
             });
             requestAnimationFrame(drawStars);
         }
