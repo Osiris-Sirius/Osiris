@@ -3,17 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OSIRIS SIRIUS | NEON LUXURY HUB</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Orbitron:wght@400;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0" />
-
-    <style>
-        :root {
-            --neon-pink: #ff007f;
-            --soft-violet: #bc13fe;<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>OSIRIS SIRIUS | Aberdeen Social Media Advertising & Video Production</title>
     <meta name="description" content="Osiris Sirius is Aberdeen's premier agency for Social Media Advertising, Video Production, and AI VFX. We elevate brands with high-end aesthetics and strategic growth management.">
@@ -69,7 +58,7 @@
         :root {
             --neon-pink: #ff007f;
             --soft-violet: #bc13fe;
-            --bg: #050206;
+            --bg: #000000; /* PURE BLACK */
         }
 
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto; background-color: var(--bg); font-family: 'Montserrat', sans-serif; color: white; cursor: none; scroll-behavior: smooth; }
@@ -104,7 +93,8 @@
             grid-template-columns: repeat(3, 1fr); gap: 15px;
         }
         .service-item { 
-            background: rgba(255, 255, 255, 0.02); padding: 22px; 
+            background: transparent; /* REMOVED GREY TINT */
+            padding: 22px; 
             border-radius: 12px; border: 1px solid rgba(255, 0, 127, 0.15);
             backdrop-filter: blur(10px); transition: 0.4s; text-align: left;
             display: flex; flex-direction: column; align-items: flex-start;
@@ -133,7 +123,7 @@
         .time-box { 
             width: 65px; height: 65px; border: 1px solid rgba(255, 0, 127, 0.3); 
             border-radius: 10px; display: flex; flex-direction: column; justify-content: center; 
-            align-items: center; background: rgba(0, 0, 0, 0.6); box-shadow: 0 0 10px rgba(255, 0, 127, 0.1);
+            align-items: center; background: rgba(0, 0, 0, 0.8); box-shadow: 0 0 10px rgba(255, 0, 127, 0.1);
         }
         .time-box span { font-size: 1.3rem; color: #fff; text-shadow: 0 0 8px var(--neon-pink); }
 
@@ -253,7 +243,9 @@
         }
 
         function drawStars() {
-            sctx.fillStyle = "#050206"; sctx.fillRect(0, 0, star.width, star.height);
+            // PURE BLACK BG
+            sctx.fillStyle = "#000000"; 
+            sctx.fillRect(0, 0, star.width, star.height);
             stars.forEach(s => {
                 sctx.fillStyle = `rgba(255, 0, 127, ${0.5 + Math.random() * 0.5})`; 
                 sctx.beginPath(); sctx.arc(s.x, s.y, s.size, 0, Math.PI * 2); sctx.fill();
