@@ -13,7 +13,7 @@
             --bg: #050206;
         }
 
-        /* Enabled Scrolling */
+        /* Scrolling Enabled */
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto; background-color: var(--bg); font-family: 'Montserrat', sans-serif; color: white; cursor: none; scroll-behavior: smooth; }
         
         #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.8; }
@@ -43,7 +43,7 @@
 
         /* Service Grid */
         .services-container {
-            max-width: 900px; margin-top: 50px; display: grid; 
+            max-width: 900px; margin-top: 60px; display: grid; 
             grid-template-columns: repeat(3, 1fr); gap: 15px;
         }
         .service-item { 
@@ -160,21 +160,20 @@
         function initStars() {
             star.width = window.innerWidth; star.height = window.innerHeight;
             stars = [];
-            for (let i = 0; i < 200; i++) {
+            for (let i = 0; i < 250; i++) {
                 stars.push({ 
                     x: Math.random() * star.width, 
                     y: Math.random() * star.height, 
-                    speed: 0.1 + Math.random() * 0.3,
-                    size: Math.random() * 1.5
+                    speed: 0.15 + Math.random() * 0.4,
+                    size: Math.random() * 2
                 });
             }
         }
 
         function drawStars() {
             sctx.fillStyle = "#050206"; sctx.fillRect(0, 0, star.width, star.height);
-            // Increased Star Brightness & Amount
             stars.forEach(s => {
-                sctx.fillStyle = `rgba(255, 0, 127, ${0.4 + Math.random() * 0.6})`; 
+                sctx.fillStyle = `rgba(255, 0, 127, ${0.5 + Math.random() * 0.5})`; 
                 sctx.beginPath(); 
                 sctx.arc(s.x, s.y, s.size, 0, Math.PI * 2); 
                 sctx.fill();
