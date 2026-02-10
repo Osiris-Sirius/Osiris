@@ -11,16 +11,22 @@
         
         #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
 
-        /* Mouse Reticle */
-        #reticle { position: fixed; width: 30px; height: 30px; border: 1px solid #0fa; border-radius: 50%; pointer-events: none; z-index: 1000; transform: translate(-50%, -50%); transition: transform 0.08s ease-out; box-shadow: 0 0 10px rgba(0, 255, 170, 0.5); }
+        /* Mouse Reticle with Reactivity */
+        #reticle { 
+            position: fixed; width: 30px; height: 30px; border: 1px solid #0fa; 
+            border-radius: 50%; pointer-events: none; z-index: 1000; 
+            transform: translate(-50%, -50%); transition: transform 0.15s ease-out, border 0.3s, background 0.3s; 
+            box-shadow: 0 0 10px rgba(0, 255, 170, 0.5); 
+        }
         #reticle::after { content: ''; position: absolute; top: 50%; left: 50%; width: 4px; height: 4px; background: #0fa; border-radius: 50%; transform: translate(-50%, -50%); }
+        
+        /* Reticle Hover State */
+        .reticle-hover { transform: translate(-50%, -50%) scale(1.8) !important; background: rgba(0, 255, 170, 0.1); border-color: #fff !important; }
 
-        /* Glitch Overlay */
         .glitch-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 255, 170, 0.03); z-index: 100; display: none; pointer-events: none; }
 
         .content { position: relative; z-index: 10; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
 
-        /* UI Elements */
         .header-wrapper { display: flex; align-items: center; gap: 40px; }
         .wing { width: 100px; height: 2px; background: linear-gradient(to right, transparent, #0fa); position: relative; }
         .wing::before { content: ''; position: absolute; top: -10px; right: 0; width: 2px; height: 20px; background: #0fa; }
@@ -50,6 +56,9 @@
             display: flex; flex-direction: column; gap: 10px;
         }
 
+        .enquiry-btn { color: #0fa; text-decoration: none; font-size: 0.65rem; font-weight: bold; pointer-events: auto; letter-spacing: 4px; border: 1px solid #0fa; padding: 5px 15px; width: fit-content; margin: 0 auto; transition: 0.3s; }
+        .enquiry-btn:hover { background: #0fa; color: #000; }
+
         @keyframes textGlitch { 0%, 98% { transform: skew(0); } 99% { transform: skew(5deg); } 100% { transform: skew(-5deg); } }
         @keyframes signalTear { 0% { clip-path: inset(80% 0 1% 0); } 100% { clip-path: inset(10% 0 10% 0); } }
         .tear { animation: signalTear 0.2s linear infinite; display: block !important; }
@@ -78,14 +87,14 @@
         </div>
 
         <div class="socials">
-            <a href="#" target="_blank" class="social-link">Instagram</a>
-            <a href="#" target="_blank" class="social-link">YouTube</a>
-            <a href="#" target="_blank" class="social-link">TikTok</a>
+            <a href="#" target="_blank" class="social-link interactive">Instagram</a>
+            <a href="#" target="_blank" class="social-link interactive">YouTube</a>
+            <a href="#" target="_blank" class="social-link interactive">TikTok</a>
         </div>
     </div>
 
     <footer>
-        <a href="#top" class="social-link" style="width: fit-content; margin: 0 auto 5px; border:none; opacity: 0.5; pointer-events: auto;">[ RESET VIEW ]</a>
+        <a href="mailto:your-email@example.com?subject=Project Inquiry: Osiris Sirius" class="enquiry-btn interactive">[ SEND ENQUIRY ]</a>
         <div>
             &copy; 2026 OSIRIS SIRIUS MULTIMEDIA <span style="color:#0fa;">// LOC: ABERDEEN, SCOTLAND</span>
         </div>
@@ -98,9 +107,16 @@
         const glitchLayer = document.getElementById('glitch-layer');
         let stars = [];
 
+        // Mouse Reticle Logic with Interactive Scaling
         document.addEventListener('mousemove', (e) => {
             reticle.style.left = e.clientX + 'px';
             reticle.style.top = e.clientY + 'px';
+        });
+
+        const interactives = document.querySelectorAll('.interactive');
+        interactives.forEach(el => {
+            el.addEventListener('mouseenter', () => reticle.classList.add('reticle-hover'));
+            el.addEventListener('mouseleave', () => reticle.classList.remove('reticle-hover'));
         });
 
         function triggerGlitch() {
@@ -132,6 +148,9 @@
                     ctx.lineWidth = 0.5; ctx.beginPath(); ctx.moveTo(s.x - 20, s.y); ctx.lineTo(s.x + 20, s.y); ctx.stroke();
                 }
                 s.y -= s.speed; if (s.y < 0) s.y = canvas.height;
+                s.opacity += (Math.random() - 0.5) * 0.05;
+                if (s.opacity < 0.1) s.opacity = 0.1;
+                if (s.opacity > 1) s.opacity = 1;
             });
             requestAnimationFrame(animate);
         }
