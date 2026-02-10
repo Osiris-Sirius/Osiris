@@ -3,14 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OSIRIS | 2026</title>
+    <title>OSIRIS | Multimedia Production</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #020205; font-family: sans-serif; color: white; display: flex; justify-content: center; align-items: center; }
-        #starCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #020205; font-family: 'Orbitron', sans-serif; color: white; display: flex; justify-content: center; align-items: center; }
+        
+        #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #020205; }
+
         .content { position: relative; z-index: 10; text-align: center; pointer-events: none; }
-        h1 { font-size: 3.5rem; letter-spacing: 15px; font-weight: 100; text-transform: uppercase; margin-bottom: 20px; text-shadow: 0 0 15px rgba(255,255,255,0.3); }
-        #countdown { display: flex; gap: 20px; justify-content: center; font-family: monospace; font-size: 2.5rem; }
-        .label { font-size: 0.7rem; color: #555; text-transform: uppercase; display: block; margin-top: 5px; }
+
+        /* Neon Effect */
+        h1 { 
+            font-size: clamp(2.5rem, 12vw, 5rem); 
+            letter-spacing: 10px; 
+            margin: 0;
+            color: #fff;
+            text-shadow: 
+                0 0 7px #fff,
+                0 0 10px #fff,
+                0 0 21px #fff,
+                0 0 42px #0fa,
+                0 0 82px #0fa,
+                0 0 92px #0fa;
+            animation: flicker 1.5s infinite alternate;
+        }
+
+        h2 {
+            font-size: clamp(0.8rem, 3vw, 1.2rem);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #0fa;
+            margin-top: 10px;
+            opacity: 0.8;
+            text-shadow: 0 0 10px #0fa;
+        }
+
+        #countdown { display: flex; gap: 20px; justify-content: center; margin-top: 40px; font-family: monospace; font-size: 1.5rem; }
+        .label { font-size: 0.6rem; color: #555; text-transform: uppercase; display: block; margin-top: 5px; letter-spacing: 2px; }
+
+        /* Neon Flicker Animation */
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 42px #0fa, 0 0 82px #0fa;
+            }
+            20%, 24%, 55% {        
+                text-shadow: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -19,6 +59,7 @@
 
     <div class="content">
         <h1>OSIRIS</h1>
+        <h2>Multimedia Production</h2>
         <div id="countdown">
             <div><span id="days">00</span><span class="label">Days</span></div>
             <div><span id="hours">00</span><span class="label">Hrs</span></div>
@@ -37,42 +78,33 @@
             canvas.height = window.innerHeight;
             stars = [];
             for (let i = 0; i < 200; i++) {
-                stars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 2,
-                    speed: 0.2 + Math.random() * 0.5
-                });
+                stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2, speed: 0.1 + Math.random() * 0.4 });
             }
         }
 
-        function draw() {
+        function animate() {
             ctx.fillStyle = "#020205";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = "white";
             stars.forEach(s => {
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-                ctx.fill();
-                s.y -= s.speed;
-                if (s.y < 0) s.y = canvas.height;
+                ctx.beginPath(); ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2); ctx.fill();
+                s.y -= s.speed; if (s.y < 0) s.y = canvas.height;
             });
-            requestAnimationFrame(draw);
+            requestAnimationFrame(animate);
         }
 
         window.addEventListener('resize', init);
         init();
-        draw();
+        animate();
 
-        // Countdown Logic
         const target = new Date("April 1, 2026 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const diff = target - now;
-            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }, 1000);
     </script>
 </body>
