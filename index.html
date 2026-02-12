@@ -1,19 +1,3 @@
-It looks like Chrome is likely caching the older version of your site, which is why you aren't seeing the ticker or the new layout. Browsers do this to save speed, but it means they often "miss" new code updates for a few hours.
-
-1. Force a "Hard Refresh" (Immediate Fix)
-To see the ticker right now, you need to tell Chrome to ignore its cache:
-
-Windows: Press Ctrl + F5.
-
-Mac: Press Cmd + Shift + R.
-
-Mobile: Open the site in an Incognito Tab.
-
-2. The Code Fix (Forcing Chrome to Update)
-I have added a "Force Hardware Acceleration" trick to the ticker. This makes Chrome's rendering engine "wake up" and display the scrolling text more reliably. I also cleaned up the Work and Start Project buttons so they are perfectly inline on all devices.
-
-Copy this exact version into your index.html:
-
 HTML
 <!DOCTYPE html>
 <html lang="en">
