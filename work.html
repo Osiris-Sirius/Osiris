@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <title>OUR WORK | OSIRIS SIRIUS Portfolio</title>
+    <meta name="description" content="Explore the OSIRIS SIRIUS portfolio. High-end VFX, cinematic video production, and editorial photography produced in Aberdeen.">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Montserrat:wght@300;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0" />
+    
+    <style>
+        :root { --p: #ff007f; --bg: #000; }
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; background: var(--bg); color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; cursor: none; }
+        
+        #stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+
+        /* TOP SYSTEM BAR */
+        #top { position: fixed; top: 0; width: 100%; z-index: 1000; background: #000; border-bottom: 2px solid var(--p); }
+        .info { display: flex; justify-content: space-between; padding: 10px 20px; font-family: 'Orbitron'; font-size: 11px; }
+
+        /* NAVIGATION BAR */
+        nav { margin-top: 45px; padding: 15px; text-align: center; background: rgba(0,0,0,0.8); border-bottom: 1px solid rgba(255,0,127,0.2); }
+        nav a { color: #fff; text-decoration: none; font-family: 'Orbitron'; font-size: 10px; letter-spacing: 3px; margin: 0 20px; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--p); text-shadow: 0 0 10px var(--p); }
+
+        .header { text-align: center; margin-top: 60px; }
+        .header h1 { font-family: 'Orbitron'; font-size: 3rem; margin: 0; color: #fff; text-shadow: 0 0 20px var(--p); }
+
+        /* PORTFOLIO GALLERY */
+        .gallery { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 30px; padding: 50px; max-width: 1400px; margin: auto; 
+        }
+        .project-card { 
+            position: relative; border: 1px solid rgba(255,0,127,0.3); 
+            height: 450px; border-radius: 15px; overflow: hidden; 
+            background: #111; transition: 0.5s;
+        }
+        /* Placeholder for your actual images/videos */
+        .project-img { 
+            width: 100%; height: 100%; background: linear-gradient(45deg, #000, #1a000d); 
+            display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: 0.5s;
+        }
+        .project-card:hover .project-img { opacity: 1; transform: scale(1.05); }
+        .project-card:hover { border-color: var(--p); box-shadow: 0 0 40px var(--p); }
+
+        .project-info { 
+            position: absolute; bottom: 0; width: 100%; padding: 30px; 
+            background: linear-gradient(transparent, #000); text-align: left;
+        }
+        .project-info h3 { font-family: 'Orbitron'; font-size: 1.2rem; margin: 0; color: var(--p); }
+        .project-info p { font-size: 0.8rem; margin: 10px 0; color: #ddd; }
+
+        /* HEART CURSOR */
+        #cursor { position: fixed; width: 18px; height: 18px; background: var(--p); transform: rotate(45deg); pointer-events: none; z-index: 5000; animation: pulse 1.2s infinite; }
+        #cursor::before, #cursor::after { content: ''; position: absolute; width: 18px; height: 18px; background: var(--p); border-radius: 50%; }
+        #cursor::before { left: -9px; } #cursor::after { top: -9px; }
+        @keyframes pulse { 0% { scale: 1; } 50% { scale: 1.3; box-shadow: 0 0 25px var(--p); } 100% { scale: 1; } }
+
+        @media (max-width: 768px) { .gallery { grid-template-columns: 1fr; padding: 20px; } #cursor { display: none; } }
+    </style>
+</head>
+<body>
+    <div id="top">
+        <div class="info">
+            <div id="status">DATABASE: ENCRYPTED</div>
+            <div id="time">00:00:00</div>
+        </div>
+    </div>
+
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="work.html" class="active">WORK</a>
+        <a href="mailto:contact@osirissirius.com">CONTACT</a>
+    </nav>
+
+    <canvas id="stars"></canvas>
+    <div id="cursor"></div>
+
+    <div class="header">
+        <h1>PROJECTS</h1>
+        <p style="letter-spacing: 5px; font-size: 10px; opacity: 0.6;">SELECTED CASE STUDIES // 2026</p>
+    </div>
+
+    <div class="gallery">
+        <div class="project-card">
+            <div class="project-img"><span class="material-symbols-outlined" style="font-size: 50px; opacity: 0.2;">videocam</span></div>
+            <div class="project-info">
+                <h3>CYBER-EDITORIAL</h3>
+                <p>High-end VFX makeover for luxury fashion brand.</p>
+            </div>
+        </div>
+        <div class="project-card">
+            <div class="project-img"><span class="material-symbols-outlined" style="font-size: 50px; opacity: 0.2;">auto_awesome</span></div>
+            <div class="project-info">
+                <h3>NEURAL CINEMA</h3>
+                <p>AI-driven video production for digital identity.</p>
+            </div>
+        </div>
+        <div class="project-card">
+            <div class="project-img"><span class="material-symbols-outlined" style="font-size: 50px; opacity: 0.2;">diamond</span></div>
+            <div class="project-info">
+                <h3>ELITE GROWTH</h3>
+                <p>Social media advertising campaign with 400% ROI.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align:center; padding: 40px; font-size: 10px; opacity: 0.4; letter-spacing: 2px;">
+        OSIRIS SIRIUS ARCHIVE // ABERDEEN
+    </footer>
+
+    <script>
+        setInterval(() => { document.getElementById('time').innerText = new Date().toLocaleTimeString(); }, 1000);
+        document.addEventListener('mousemove', (e) => {
+            const c = document.getElementById('cursor');
+            c.style.left = e.clientX + 'px'; c.style.top = e.clientY + 'px';
+        });
+        const canvas = document.getElementById('stars');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.onresize = resize; resize();
+        for(let i=0; i<100; i++) stars.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, s:Math.random()*2, v:0.05+Math.random()*0.1});
+        function animate() {
+            ctx.fillStyle = '#000'; ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = '#ff007f';
+            stars.forEach(st => {
+                ctx.beginPath(); ctx.arc(st.x, st.y, st.s, 0, Math.PI*2); ctx.fill();
+                st.y -= st.v; if(st.y < 0) st.y = canvas.height;
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
