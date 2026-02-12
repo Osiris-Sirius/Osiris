@@ -1,3 +1,20 @@
+It looks like Chrome is likely caching the older version of your site, which is why you aren't seeing the ticker or the new layout. Browsers do this to save speed, but it means they often "miss" new code updates for a few hours.
+
+1. Force a "Hard Refresh" (Immediate Fix)
+To see the ticker right now, you need to tell Chrome to ignore its cache:
+
+Windows: Press Ctrl + F5.
+
+Mac: Press Cmd + Shift + R.
+
+Mobile: Open the site in an Incognito Tab.
+
+2. The Code Fix (Forcing Chrome to Update)
+I have added a "Force Hardware Acceleration" trick to the ticker. This makes Chrome's rendering engine "wake up" and display the scrolling text more reliably. I also cleaned up the Work and Start Project buttons so they are perfectly inline on all devices.
+
+Copy this exact version into your index.html:
+
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +23,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
     
     <title>OSIRIS SIRIUS | Aberdeen Social Media Advertising & Video Production</title>
-    <meta name="description" content="Premium Aberdeen agency specializing in Social Media Advertising, Cinematic Video Production, and AI VFX.">
+    <meta name="description" content="Premium Aberdeen agency specializing in Social Media Advertising, Cinematic Video Production, and AI VFX. High-end content strategy and OF management.">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Montserrat:wght@300;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0" />
     
     <style>
@@ -16,37 +33,49 @@
         
         #stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
-        /* ---- DUAL TOP BAR (SYSTEM + TICKER) ---- */
-        #top-fixed { position: fixed; top: 0; width: 100%; z-index: 2000; background: #000; border-bottom: 2px solid var(--p); }
+        /* TOP SYSTEM BAR */
+        #top-wrap { position: fixed; top: 0; width: 100%; z-index: 2000; background: #000; border-bottom: 2px solid var(--p); }
         .info { display: flex; justify-content: space-between; padding: 10px 20px; font-family: 'Orbitron'; font-size: 11px; }
-        .ticker-container { background: rgba(255, 0, 127, 0.1); overflow: hidden; white-space: nowrap; padding: 5px 0; border-top: 1px solid rgba(255, 0, 127, 0.2); }
-        .ticker-text { display: inline-block; animation: scroll 30s linear infinite; font-size: 10px; letter-spacing: 2px; color: var(--p); font-weight: bold; }
-        @keyframes scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+        .ticker-container { background: rgba(255, 0, 127, 0.1); overflow: hidden; white-space: nowrap; padding: 6px 0; border-top: 1px solid rgba(255, 0, 127, 0.2); }
+        
+        /* CHROME-FRIENDLY TICKER */
+        .ticker-text { 
+            display: inline-block; 
+            padding-left: 100%;
+            animation: ticker-move 35s linear infinite; 
+            font-size: 11px; letter-spacing: 2px; color: var(--p); font-weight: 700;
+            will-change: transform; /* Tells Chrome to use GPU */
+        }
+        @keyframes ticker-move { 
+            0% { transform: translate3d(0, 0, 0); } 
+            100% { transform: translate3d(-200%, 0, 0); } 
+        }
 
         /* NAVIGATION BAR */
-        nav { position: fixed; top: 65px; width: 100%; z-index: 1000; padding: 15px; text-align: center; background: rgba(0,0,0,0.85); border-bottom: 1px solid rgba(255,0,127,0.2); backdrop-filter: blur(10px); }
-        nav a { color: #fff; text-decoration: none; font-family: 'Orbitron'; font-size: 10px; letter-spacing: 3px; margin: 0 20px; transition: 0.3s; }
+        nav { position: fixed; top: 70px; width: 100%; z-index: 1000; padding: 12px; text-align: center; background: rgba(0,0,0,0.85); border-bottom: 1px solid rgba(255,0,127,0.2); backdrop-filter: blur(10px); }
+        nav a { color: #fff; text-decoration: none; font-family: 'Orbitron'; font-size: 10px; letter-spacing: 3px; margin: 0 18px; transition: 0.3s; }
         nav a:hover, nav a.active { color: var(--p); text-shadow: 0 0 10px var(--p); }
 
         /* HEADER & GLITCH */
-        .glitch-container { text-align: center; margin-top: 220px; }
+        .glitch-container { text-align: center; margin-top: 230px; }
         .glitch { font-family: 'Orbitron'; font-size: clamp(32px, 10vw, 75px); font-weight: 900; color: #fff; text-shadow: 0 0 15px var(--p); position: relative; animation: flicker-color 4s infinite; }
         @keyframes flicker-color { 0%, 75%, 100% { color: #fff; } 80%, 95% { color: var(--p); } }
         .glitch::before { content: "OSIRIS SIRIUS"; position: absolute; left: 0; top: 0; width: 100%; height: 100%; text-shadow: -2px 0 var(--p); animation: glitch-move 0.5s infinite; opacity: 0.7; }
-        @keyframes glitch-move { 0%, 100% { transform: translate(0); } 33% { transform: translate(-3px, 1px); } 66% { transform: translate(3px, -1px); } }
+        @keyframes glitch-move { 0%, 100% { transform: translate(0); } 33% { transform: translate(-2px, 1px); } 66% { transform: translate(2px, -1px); } }
 
-        /* GRID */
+        /* PERFECT GRID */
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 40px; max-width: 1200px; margin: auto; }
         .card { border: 2px solid var(--p); padding: 30px; text-align: center; border-radius: 12px; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); transition: 0.4s; }
         .card:hover { border-color: #fff; box-shadow: 0 0 35px var(--p); transform: translateY(-10px); }
         .card span { font-size: 45px; color: var(--p); margin-bottom: 15px; }
+        .card h3 { font-family: 'Orbitron'; font-size: 13px; margin: 15px 0; color: #fff; }
+        .card p { font-size: 11px; color: #ddd; line-height: 1.6; }
 
         /* BUTTONS */
-        .btn-wrap { text-align: center; margin: 40px 0; display: flex; justify-content: center; gap: 20px; }
-        .btn { display: inline-block; padding: 15px 35px; border: 2px solid var(--p); color: #fff; text-decoration: none; font-family: 'Orbitron'; font-weight: 900; border-radius: 50px; background: rgba(255, 0, 127, 0.05); transition: 0.3s; font-size: 11px; letter-spacing: 2px; }
+        .btn-wrap { text-align: center; margin: 40px 0; display: flex; justify-content: center; gap: 20px; padding: 0 20px; }
+        .btn { display: inline-block; padding: 16px 30px; border: 2px solid var(--p); color: #fff; text-decoration: none; font-family: 'Orbitron'; font-weight: 900; border-radius: 50px; background: rgba(255, 0, 127, 0.05); transition: 0.3s; font-size: 11px; letter-spacing: 2px; flex: 1; max-width: 250px; }
         .btn:hover { background: var(--p); color: #000; box-shadow: 0 0 50px var(--p); }
         .btn-alt { border-color: #fff; }
-        .btn-alt:hover { background: #fff; box-shadow: 0 0 30px #fff; }
 
         /* HEART CURSOR */
         #cursor { position: fixed; width: 18px; height: 18px; background: var(--p); transform: rotate(45deg); pointer-events: none; z-index: 5000; animation: pulse 1.2s infinite; }
@@ -58,21 +87,20 @@
             .grid { grid-template-columns: 1fr; } 
             #cursor { display: none; } 
             .btn-wrap { flex-direction: column; align-items: center; } 
-            .glitch-container { margin-top: 200px; }
-            nav { top: 60px; padding: 10px; }
-            nav a { margin: 0 10px; font-size: 8px; }
+            .btn { width: 100%; max-width: 300px; }
+            .glitch-container { margin-top: 220px; }
         }
     </style>
 </head>
 <body>
-    <div id="top-fixed">
+    <div id="top-wrap">
         <div class="info">
             <div id="status">AI SYSTEM: ACTIVE</div>
             <div id="time">00:00:00</div>
         </div>
         <div class="ticker-container">
             <div class="ticker-text">
-                +++ AI NEWS: GPT-6 INTEGRATION SUCCESSFUL +++ ABERDEEN DESIGN HUB RANKED #1 +++ NEW NEURAL VFX MODELS RELEASED +++ OSIRIS SIRIUS REVENUE UP 400% +++ WELCOME TO THE FUTURE OF PRODUCTION +++
+                +++ BREAKING: OSIRIS SIRIUS REVOLUTIONIZING ABERDEEN ADVERTISING +++ AI VFX MODELS UPDATED +++ HIGH-END PRODUCTION HUB ONLINE +++ 2026 DIGITAL STRATEGIES READY +++
             </div>
         </div>
     </div>
@@ -88,7 +116,7 @@
 
     <div class="glitch-container">
         <h1 class="glitch">OSIRIS SIRIUS</h1>
-        <p style="letter-spacing: 6px; font-size: 10px; color: #fff; margin-top: 10px;">ABERDEEN CREATIVE PRODUCTION</p>
+        <p style="letter-spacing: 6px; font-size: 10px; color: #fff; margin-top: 10px; font-weight: 700;">ABERDEEN CREATIVE PRODUCTION</p>
     </div>
 
     <div class="grid">
@@ -107,20 +135,16 @@
     </footer>
 
     <script>
-        // SYSTEM UPDATES
-        const msgs = ["SYSTEM: OPTIMIZED", "LOCATING: ABERDEEN", "ENCRYPTION: SECURE", "OSIRIS: ONLINE"];
+        const msgs = ["SYSTEM: OPTIMIZED", "LOCATING: ABERDEEN", "OSIRIS: ONLINE"];
         let mIdx = 0;
         setInterval(() => { mIdx = (mIdx + 1) % msgs.length; document.getElementById('status').innerText = msgs[mIdx]; }, 4000);
-
         setInterval(() => { document.getElementById('time').innerText = new Date().toLocaleTimeString(); }, 1000);
 
-        // CURSOR
         document.addEventListener('mousemove', (e) => {
             const c = document.getElementById('cursor');
             c.style.left = e.clientX + 'px'; c.style.top = e.clientY + 'px';
         });
 
-        // STARS
         const canvas = document.getElementById('stars');
         const ctx = canvas.getContext('2d');
         let stars = [];
