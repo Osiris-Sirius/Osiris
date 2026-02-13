@@ -4,88 +4,157 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OSIRIS SIRIUS | Aberdeen AI Advertising & Video Production</title>
-    <meta name="description" content="Premium Aberdeen agency specializing in Social Media Advertising, Cinematic Video Production, and AI VFX. Elevate your brand with OSIRIS SIRIUS.">
-    <meta name="keywords" content="Aberdeen Social Media Advertising, Video Production Aberdeen, AI VFX Scotland, Social Media Growth">
-    <link rel="canonical" href="https://osirissirius.com/index.html" />
-    <link rel="icon" type="image/png" href="favicon.png">
     
-    <meta property="og:title" content="OSIRIS SIRIUS | Creative Production Hub">
-    <meta property="og:description" content="High-end AI VFX and Video Production in Aberdeen.">
-    <meta property="og:url" content="https://osirissirius.com/index.html">
+    <meta name="description" content="Premium Aberdeen agency specializing in Social Media Advertising, Cinematic Video Production, and AI VFX.">
+    <link rel="canonical" href="https://osiris-code.github.io/index.html" />
+    <link rel="icon" type="image/png" href="favicon.png">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Montserrat:wght@300;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0" />
+    
     <style>
         :root { --p: #ff007f; --bg: #000; }
         * { box-sizing: border-box; }
         body { margin: 0; padding: 0; background: var(--bg); color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; cursor: none; }
+        
         #stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        #top-bar { position: fixed; top: 0; width: 100%; z-index: 2000; background: #000; border-bottom: 2px solid var(--p); }
+
+        /* TOP SYSTEM BAR & TICKER */
+        #top-wrap { position: fixed; top: 0; width: 100%; z-index: 2000; background: #000; border-bottom: 2px solid var(--p); }
         .info { display: flex; justify-content: space-between; padding: 10px 20px; font-family: 'Orbitron'; font-size: 11px; }
-        .ticker { background: rgba(255, 0, 127, 0.1); overflow: hidden; white-space: nowrap; padding: 6px 0; border-top: 1px solid rgba(255, 0, 127, 0.2); }
-        .ticker-t { display: inline-block; padding-left: 100%; animation: scroll 35s linear infinite; font-size: 11px; color: var(--p); font-weight: 700; will-change: transform; }
-        @keyframes scroll { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-200%, 0, 0); } }
+        .ticker-container { background: rgba(255, 0, 127, 0.1); overflow: hidden; white-space: nowrap; padding: 6px 0; border-top: 1px solid rgba(255, 0, 127, 0.2); }
+        .ticker-text { 
+            display: inline-block; padding-left: 100%; animation: ticker-move 35s linear infinite; 
+            font-size: 11px; letter-spacing: 2px; color: var(--p); font-weight: 700; will-change: transform;
+        }
+        @keyframes ticker-move { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-200%, 0, 0); } }
+
+        /* NAVIGATION BAR */
         nav { position: fixed; top: 70px; width: 100%; z-index: 1000; padding: 12px; text-align: center; background: rgba(0,0,0,0.85); border-bottom: 1px solid rgba(255,0,127,0.2); backdrop-filter: blur(10px); }
-        nav a { color: #fff; text-decoration: none; font-family: 'Orbitron'; font-size: 10px; letter-spacing: 3px; margin: 0 15px; transition: 0.3s; }
-        nav a.active, nav a:hover { color: var(--p); text-shadow: 0 0 10px var(--p); }
-        .hero { text-align: center; margin-top: 230px; }
-        .glitch { font-family: 'Orbitron'; font-size: clamp(32px, 10vw, 75px); font-weight: 900; color: #fff; text-shadow: 0 0 15px var(--p); position: relative; animation: flicker 4s infinite; display: inline-block; }
-        @keyframes flicker { 0%, 75%, 100% { color: #fff; } 80%, 95% { color: var(--p); } }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 40px; max-width: 1200px; margin: auto; }
-        .card { border: 2px solid var(--p); padding: 30px; text-align: center; border-radius: 12px; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); transition: 0.4s; }
+        nav a { color: #fff; text-decoration: none; font-family: 'Orbitron'; font-size: 10px; letter-spacing: 3px; margin: 0 18px; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--p); text-shadow: 0 0 10px var(--p); }
+
+        /* HEADER & GLITCH */
+        .main-wrapper { position: relative; z-index: 10; padding-top: 230px; text-align: center; }
+        .glitch { font-family: 'Orbitron'; font-size: clamp(32px, 10vw, 75px); font-weight: 900; color: #fff; text-shadow: 0 0 15px var(--p); position: relative; animation: flicker-color 4s infinite; display: inline-block; }
+        @keyframes flicker-color { 0%, 75%, 100% { color: #fff; } 80%, 95% { color: var(--p); } }
+        .glitch::before { content: "OSIRIS SIRIUS"; position: absolute; left: 0; top: 0; width: 100%; height: 100%; text-shadow: -2px 0 var(--p); animation: glitch-move 0.5s infinite; opacity: 0.7; }
+        @keyframes glitch-move { 0%, 100% { transform: translate(0); } 33% { transform: translate(-2px, 1px); } 66% { transform: translate(2px, -1px); } }
+
+        /* GRID SYSTEM */
+        .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 40px; max-width: 1200px; margin: auto; }
+        .card { border: 2px solid var(--p); padding: 30px; text-align: center; border-radius: 12px; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); transition: 0.4s; flex: 1 1 300px; max-width: 380px; }
         .card:hover { border-color: #fff; box-shadow: 0 0 35px var(--p); transform: translateY(-10px); }
         .card span { font-size: 45px; color: var(--p); margin-bottom: 15px; }
-        .btn { display: inline-block; padding: 16px 35px; border: 2px solid var(--p); color: #fff; text-decoration: none; font-family: 'Orbitron'; font-weight: 900; border-radius: 50px; background: rgba(255, 0, 127, 0.05); transition: 0.3s; }
+        .card h3 { font-family: 'Orbitron'; font-size: 14px; margin: 15px 0; color: #fff; }
+        .card p { font-size: 12px; color: #ddd; line-height: 1.6; }
+
+        /* BUTTONS */
+        .btn-wrap { text-align: center; margin: 40px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 0 20px; }
+        .btn { display: inline-block; padding: 16px 30px; border: 2px solid var(--p); color: #fff; text-decoration: none; font-family: 'Orbitron'; font-weight: 900; border-radius: 50px; background: rgba(255, 0, 127, 0.05); transition: 0.3s; font-size: 11px; letter-spacing: 2px; min-width: 220px; }
         .btn:hover { background: var(--p); color: #000; box-shadow: 0 0 50px var(--p); }
+        .btn-alt { border-color: #fff; }
+
+        /* SOCIAL ICONS (Official Symbols) */
+        .social-icons { display: flex; justify-content: center; gap: 30px; margin: 40px 0; }
+        .social-icons a { color: #fff; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 10px; font-family: 'Orbitron'; font-size: 10px; letter-spacing: 2px; }
+        .social-icons a:hover { color: var(--p); transform: translateY(-3px); }
+
+        /* HEART CURSOR */
         #cursor { position: fixed; width: 18px; height: 18px; background: var(--p); transform: rotate(45deg); pointer-events: none; z-index: 5000; animation: pulse 1.2s infinite; border-radius: 2px; }
         #cursor::before, #cursor::after { content: ''; position: absolute; width: 18px; height: 18px; background: var(--p); border-radius: 50%; }
         #cursor::before { left: -9px; } #cursor::after { top: -9px; }
-        @keyframes pulse { 0%, 100% { scale: 1; } 50% { scale: 1.3; } }
-        .social-footer { margin-top: 50px; display: flex; justify-content: center; gap: 30px; padding-bottom: 40px; }
-        .social-footer a { color: #fff; text-decoration: none; transition: 0.3s; }
-        .social-footer a:hover { color: var(--p); transform: scale(1.2); }
-        @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } #cursor { display: none; } }
+        @keyframes pulse { 0% { scale: 1; } 50% { scale: 1.3; box-shadow: 0 0 25px var(--p); } 100% { scale: 1; } }
+
+        @media (max-width: 900px) { #cursor { display: none; } .btn { width: 100%; } .main-wrapper { padding-top: 220px; } .grid { padding: 20px; } }
     </style>
 </head>
 <body>
-    <div id="top-bar">
-        <div class="info"><div id="status">OSIRIS: ONLINE</div><div id="time">00:00:00</div></div>
-        <div class="ticker"><div class="ticker-t">+++ ABERDEEN CREATIVE HUB +++ AI VFX MODELS UPDATED +++ SOCIAL MEDIA PROMOTION ACTIVE +++</div></div>
+    <div id="top-wrap">
+        <div class="info">
+            <div id="status">OSIRIS: ONLINE</div>
+            <div id="time">00:00:00</div>
+        </div>
+        <div class="ticker-container">
+            <div class="ticker-text">
+                +++ BREAKING: OSIRIS SIRIUS REVOLUTIONIZING ABERDEEN ADVERTISING +++ AI VFX MODELS UPDATED +++ HIGH-END PRODUCTION HUB ONLINE +++ 2026 DIGITAL STRATEGIES READY +++
+            </div>
+        </div>
     </div>
+
     <nav>
         <a href="index.html" class="active">HOME</a>
         <a href="work.html">SHOWREEL</a>
         <a href="promotion.html">PROMOTION</a>
         <a href="contact.html">CONTACT</a>
     </nav>
+
     <canvas id="stars"></canvas><div id="cursor"></div>
-    <div class="hero">
+
+    <div class="main-wrapper">
         <h1 class="glitch">OSIRIS SIRIUS</h1>
-        <p style="letter-spacing: 6px; font-size: 10px; font-weight: 700;">PREMIUM CREATIVE PRODUCTION</p>
+        <p style="letter-spacing: 6px; font-size: 10px; color: #fff; margin-top: 10px; font-weight: 700;">ABERDEEN CREATIVE PRODUCTION</p>
+
         <div class="grid">
-            <div class="card"><span class="material-symbols-outlined">auto_awesome</span><h3>VFX & AI</h3><p>Digital retouching and neural enhancements.</p></div>
-            <div class="card"><span class="material-symbols-outlined">videocam</span><h3>VIDEO</h3><p>Cinematic brand storytelling.</p></div>
-            <div class="card"><span class="material-symbols-outlined">trending_up</span><h3>PROMOTION</h3><p>Social media scaling & growth.</p></div>
+            <div class="card">
+                <span class="material-symbols-outlined">auto_awesome</span>
+                <h3>VFX & AI MAKEOVERS</h3>
+                <p>Digital enhancements and Photoshop AI transformations for elite visual branding.</p>
+            </div>
+            <div class="card">
+                <span class="material-symbols-outlined">videocam</span>
+                <h3>VIDEO PRODUCTION</h3>
+                <p>Cinematic brand storytelling captured via Adobe Premiere & After Effects.</p>
+            </div>
+            <div class="card">
+                <span class="material-symbols-outlined">trending_up</span>
+                <h3>SOCIAL PROMOTION</h3>
+                <p>Algorithm dominance and social scaling strategies for maximum reach.</p>
+            </div>
         </div>
-        <a href="work.html" class="btn">ENTER ARCHIVE</a>
-    </div>
 
-    <div class="social-footer">
-        <a href="https://www.facebook.com/ThaRealOsiris" target="_blank">FB</a>
-        <a href="https://www.instagram.com/osirissirius/" target="_blank">IG</a>
-        <a href="https://www.youtube.com/@TheOsirisSirius" target="_blank">YT</a>
-    </div>
+        <div class="btn-wrap">
+            <a href="work.html" class="btn">VIEW OUR WORK</a>
+            <a href="contact.html" class="btn btn-alt">START PROJECT</a>
+        </div>
 
-    <footer style="text-align:center; padding-bottom: 30px; font-size: 10px; opacity: 0.5;">&copy; 2026 OSIRIS SIRIUS // ABERDEEN</footer>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/ThaRealOsiris" target="_blank"><span class="material-symbols-outlined">public</span> FACEBOOK</a>
+            <a href="https://www.instagram.com/osirissirius/" target="_blank"><span class="material-symbols-outlined">camera_reveal</span> INSTAGRAM</a>
+            <a href="https://www.youtube.com/@TheOsirisSirius" target="_blank"><span class="material-symbols-outlined">play_circle</span> YOUTUBE</a>
+        </div>
+
+        <footer style="text-align:center; padding-bottom: 30px; font-size: 10px; opacity: 0.5; letter-spacing: 2px;">
+            &copy; 2026 OSIRIS SIRIUS // ABERDEEN, SCT
+        </footer>
+    </div>
 
     <script>
+        const msgs = ["SYSTEM: OPTIMIZED", "LOCATING: ABERDEEN", "OSIRIS: ONLINE"];
+        let mIdx = 0;
+        setInterval(() => { mIdx = (mIdx + 1) % msgs.length; document.getElementById('status').innerText = msgs[mIdx]; }, 4000);
         setInterval(() => { document.getElementById('time').innerText = new Date().toLocaleTimeString(); }, 1000);
-        document.addEventListener('mousemove', (e) => { const c = document.getElementById('cursor'); c.style.left = e.clientX + 'px'; c.style.top = e.clientY + 'px'; });
-        const canvas = document.getElementById('stars'); const ctx = canvas.getContext('2d'); let stars = [];
-        function res() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.onresize = res; res();
+
+        document.addEventListener('mousemove', (e) => {
+            const c = document.getElementById('cursor');
+            c.style.left = e.clientX + 'px'; c.style.top = e.clientY + 'px';
+        });
+
+        const canvas = document.getElementById('stars');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.onresize = resize; resize();
         for(let i=0; i<100; i++) stars.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, s:Math.random()*2, v:0.05+Math.random()*0.1});
-        function anim() { ctx.fillStyle = '#000'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.fillStyle = '#ff007f'; stars.forEach(st => { ctx.beginPath(); ctx.arc(st.x, st.y, st.s, 0, Math.PI*2); ctx.fill(); st.y -= st.v; if(st.y < 0) st.y = canvas.height; }); requestAnimationFrame(anim); }
-        anim();
+        function animate() {
+            ctx.fillStyle = '#000'; ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = '#ff007f';
+            stars.forEach(st => {
+                ctx.beginPath(); ctx.arc(st.x, st.y, st.s, 0, Math.PI*2); ctx.fill();
+                st.y -= st.v; if(st.y < 0) st.y = canvas.height;
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
     </script>
 </body>
 </html>
