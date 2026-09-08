@@ -63,14 +63,31 @@ body.nav-open .nav-toggle span:after{top:0;transform:rotate(-45deg)}
   .nav-toggle{display:inline-flex}
   .more{display:none}
   .nav{
-    position:fixed; inset:0; max-width:none; padding:5.25rem 1.35rem 2rem;
-    background:rgba(11,11,15,.98); flex-direction:column; align-items:stretch;
-    justify-content:flex-start; gap:0; transform:translateX(100%); transition:transform .25s ease; overflow:auto;
+    position:fixed; inset:0; max-width:none;
+    padding:5rem 1rem 1.25rem;
+    background:rgba(8,8,12,.96);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-content:start;
+    gap:.55rem;
+    transform:translateY(-104%);
+    transition:transform .28s ease;
+    overflow:hidden;
+    scrollbar-width:none;
   }
+  .nav::-webkit-scrollbar{display:none}
   body.nav-open .nav{transform:none}
   .nav-desktop{display:none}
-  .nav-more{display:flex; flex-direction:column}
-  .nav a{padding:1rem 0; border-bottom:1px solid var(--line); border-radius:0; font-size:1.05rem; color:#fff}
+  .nav-more{display:flex}
+  .nav a{
+    display:flex; align-items:center; justify-content:center;
+    min-height:48px; padding:.7rem .55rem;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:14px;
+    background:rgba(255,255,255,.03);
+    font-size:.9rem; font-weight:600; color:#fff; text-align:center;
+  }
+  .nav a.active{color:var(--pink); border-color:rgba(255,45,149,.45); background:rgba(255,45,149,.1)}
 }
 
 /* layout */
@@ -142,3 +159,9 @@ input:focus,textarea:focus,select:focus{outline:2px solid rgba(255,45,149,.35); 
 .panel .media-frame{margin-bottom:1rem}
 .feature-row{display:grid; gap:1.25rem; margin-top:1.5rem}
 @media(min-width:800px){.feature-row{grid-template-columns:1fr 1fr; gap:1.4rem}}
+
+.page-hero-media{margin:0 0 1.5rem}
+.page-hero-media img{width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:18px; border:1px solid var(--line); display:block}
+.split-media{display:grid; gap:1rem; margin:0 0 1.5rem}
+@media(min-width:760px){.split-media{grid-template-columns:1.4fr .8fr}}
+.split-media img{width:100%; height:100%; object-fit:cover; border-radius:18px; border:1px solid var(--line); min-height:180px}
