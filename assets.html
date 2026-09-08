@@ -16,6 +16,7 @@
   <meta name="twitter:image" content="https://osiris-sirius.github.io/Osiris/assets/google-listing.png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
   <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=IBM+Plex+Mono:wght@400;600&family=Orbitron:wght@600&display=swap">
 </head>
 <body>
   <div id="preloader" aria-hidden="true"><div><div class="loader-mark"></div><div class="loader-text">Creative Motion</div></div></div>
@@ -27,7 +28,7 @@
       </a>
       <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
       <nav class="site-nav" id="site-nav" aria-label="Primary">
-        <a href="index.html">Home</a><a href="services.html">Services</a><a href="video.html">Video</a><a href="ai-edit.html">AI Edit</a><a href="web-design.html">Web Design</a><a href="promotions.html">Media Promos</a><a href="graphic-design.html">Graphic Design</a><a href="multimedia.html">Multimedia</a><a href="assets.html" class="active" aria-current="page">Assets</a><a href="contact.html">Contact</a>
+        <a href="index.html">Home</a><a href="services.html">Services</a><a href="video.html">Video</a><a href="ai-edit.html">AI Edit</a><a href="web-design.html">Web Design</a><a href="promotions.html">Media Promos</a><a href="graphic-design.html">Graphic Design</a><a href="multimedia.html">Multimedia</a><a href="contact.html">Contact</a>
       </nav>
     </div>
   </header>
@@ -48,6 +49,24 @@
     <figure class="img-box"><img src="assets/feature-studio.jpg" alt="Studio desk"><figcaption class="note">Studio desk</figcaption></figure>
     <figure class="img-box"><img src="assets/logo.png" alt="Logo"><figcaption class="note">Logo</figcaption></figure>
     <figure class="img-box"><img src="assets/google-listing.jpg" alt="Listing" onerror="this.src='assets/google-listing.png'"><figcaption class="note">Google listing</figcaption></figure>
+  </div>
+
+  
+  <h2 style="margin:2rem 0 .8rem">Font styles</h2>
+  <div class="grid">
+    <article class="card"><h3 class="font-wide">Orbitron</h3><p>Wide display, labels and ticks.</p></article>
+    <article class="card"><h3 class="font-serif">Georgia serif</h3><p>Editorial headings and quotes.</p></article>
+    <article class="card"><h3 class="font-mono">IBM Plex Mono</h3><p>Specs, prices, kit lists.</p></article>
+    <article class="card"><h3 class="font-script">Great Vibes</h3><p>Signatures and soft titles.</p></article>
+  </div>
+
+  <h2 style="margin:2rem 0 .4rem">Countdown</h2>
+  <p class="note" style="text-align:center">Sample target: 1 October 2026</p>
+  <div class="count" id="countdown" data-date="2026-10-01T00:00:00+01:00">
+    <div><b data-k="d">0</b><span>DAYS</span></div>
+    <div><b data-k="h">0</b><span>HRS</span></div>
+    <div><b data-k="m">0</b><span>MIN</span></div>
+    <div><b data-k="s">0</b><span>SEC</span></div>
   </div>
 
   <h2 style="margin:2rem 0 .8rem">Headings</h2>
@@ -93,4 +112,25 @@
       <figure class="img-box"><img src="assets/reuse-mark.jpg" alt="Creative Motion mark"></figure>
     </div></footer>
   <script src="assets/site.js"></script>
+
+<script>
+(function(){
+  var box=document.getElementById('countdown');
+  if(!box) return;
+  var end=new Date(box.getAttribute('data-date')).getTime();
+  function tick(){
+    var left=Math.max(0, end-Date.now());
+    var s=Math.floor(left/1000);
+    var d=Math.floor(s/86400); s-=d*86400;
+    var h=Math.floor(s/3600); s-=h*3600;
+    var m=Math.floor(s/60); s-=m*60;
+    box.querySelector('[data-k="d"]').textContent=d;
+    box.querySelector('[data-k="h"]').textContent=String(h).padStart(2,'0');
+    box.querySelector('[data-k="m"]').textContent=String(m).padStart(2,'0');
+    box.querySelector('[data-k="s"]').textContent=String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick,1000);
+})();
+</script>
+
 </body></html>
