@@ -236,3 +236,8 @@ body.nav-open .nav-toggle span:after{top:0; transform:rotate(-45deg)}
   .img-row{grid-template-columns:1.5fr .9fr}
   .img-box img{height:260px}
 }
+
+.page-links{display:flex; flex-wrap:wrap; gap:.7rem; margin:0 0 1.4rem}
+.img-grid{display:grid; gap:1rem; grid-template-columns:1fr; margin:0 0 1.4rem}
+@media(min-width:700px){.img-grid{grid-template-columns:1fr 1fr}}
+.img-grid .img-box img{height:200px}
