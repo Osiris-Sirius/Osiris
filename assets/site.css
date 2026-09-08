@@ -2,7 +2,7 @@
 :root{
   --bg:#0b0b0f; --bg2:#121218; --card:#17171f; --text:#f4f4f5; --muted:#a0a0ab;
   --pink:#ff2d95; --pink2:#ff5aad; --line:rgba(255,255,255,.1); --max:1100px; --r:16px;
-  --display:"Outfit",system-ui,sans-serif; --font:"Inter",system-ui,sans-serif;
+  --display:"Plus Jakarta Sans",system-ui,sans-serif; --font:"Manrope",system-ui,sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -136,3 +136,9 @@ input:focus,textarea:focus,select:focus{outline:2px solid rgba(255,45,149,.35); 
 .site-footer{border-top:1px solid var(--line); padding:2.25rem 0; color:var(--muted); font-size:.88rem; margin-top:.5rem}
 .footer-inner{display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; align-items:center}
 .socials{display:flex; gap:1.1rem; flex-wrap:wrap}.socials a:hover{color:var(--pink)}
+
+.media-frame{border-radius:18px; overflow:hidden; border:1px solid var(--line); background:var(--bg2)}
+.media-frame img{width:100%; aspect-ratio:16/9; object-fit:cover; display:block}
+.panel .media-frame{margin-bottom:1rem}
+.feature-row{display:grid; gap:1.25rem; margin-top:1.5rem}
+@media(min-width:800px){.feature-row{grid-template-columns:1fr 1fr; gap:1.4rem}}
