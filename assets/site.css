@@ -241,3 +241,12 @@ body.nav-open .nav-toggle span:after{top:0; transform:rotate(-45deg)}
 .img-grid{display:grid; gap:1rem; grid-template-columns:1fr; margin:0 0 1.4rem}
 @media(min-width:700px){.img-grid{grid-template-columns:1fr 1fr}}
 .img-grid .img-box img{height:200px}
+
+.video-frame{aspect-ratio:16/9; position:relative}
+.video-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+.swatch{height:72px; border-radius:12px; border:1px solid var(--line)}
+.bar{height:10px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden; margin:.45rem 0 1rem}
+.bar > span{display:block; height:100%; background:linear-gradient(90deg,#ff2d95,#ff5aad); border-radius:999px}
+.pie{width:140px; height:140px; border-radius:50%; background:conic-gradient(#ff2d95 0 42%, #ff5aad 42% 68%, #3a3a46 68% 100%); box-shadow:inset 0 0 0 18px #121218}
+.pie-row{display:flex; gap:1.2rem; align-items:center; flex-wrap:wrap}
+.asset-gallery{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
